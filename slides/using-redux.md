@@ -15,8 +15,8 @@ const initialDataFromServer = {
 }
 
 import { createStore, combineReducers } from 'redux';
-import {Reducer as Timesheet} from './modules/Timesheet';
-import {Reducer as Budget} from './modules/Budgets';
+import { Reducer as Timesheet } from './modules/Timesheet';
+import { Reducer as Budget } from './modules/Budgets';
 
 const reducers = combineReducers({
 	Timesheet,
@@ -40,7 +40,7 @@ Note:
 3. Reducer reduces state <!-- .element: class="fragment" data-fragment-index="3" -->
 4. Redux Store saves new state tree from output of all Reducers <!-- .element: class="fragment" data-fragment-index="4" -->
 5. Redux Store notifiies all listeners <!-- .element: class="fragment" data-fragment-index="5" -->
-6. Listeners get state via `getState()` <!-- .element: class="fragment" data-fragment-index="6" -->
+6. Listeners get state via getState() <!-- .element: class="fragment" data-fragment-index="6" -->
 
 
 #### 1. Dispatching an Action
@@ -74,7 +74,7 @@ The switch statement is a bit awkward. We can refactor the matching of an action
 #### 2.5 Refactored Reducer Creation
 
 ```javascript
-import {createReducer} from './lib/utils/redux';
+import { createReducer } from './lib/utils/redux';
 
 const initialState = {
 	items: []

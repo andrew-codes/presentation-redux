@@ -98,6 +98,6 @@ Note:
 
 ```javascript
 import { createStore } from 'redux';
-import TimesheetReducer from './modules/Timesheet/Reducer';
+import { Reducer as TimesheetReducer } from './modules/Timesheet/Reducer';
 let store = createStore(TimesheetReducer);
 ```
