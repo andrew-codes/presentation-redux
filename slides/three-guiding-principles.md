@@ -3,22 +3,29 @@
 
 ### There is a single source of truth
 
-- meaning all state is stored in a single object <!-- .element: class="fragment" data-fragment-index="1" -->
+Note:
+- meaning all state is stored in a single object
+- there is not duplication of state
 
 
 ### State is read-only
 
-- when reading application state, it is immutable <!-- .element: class="fragment" data-fragment-index="1" -->
+Note:
+- when reading application state, it is immutable
 
 
-### Mutations are via pure functions
+### Mutations are made via pure functions
 
-- given the same input, will always return the same output <!-- .element .em: class="fragment" data-fragment-index="1" -->
-- means no side-effects <!-- .element: class="fragment" data-fragment-index="2" -->
+Note:
+- functions are pure if they return the same output, when given the same input
+- meaning they have no side-effects
 
 
 ### Pure Functions FTW!
 - hot reloading, <!-- .element: class="fragment" data-fragment-index="1" -->
 - time travel, <!-- .element: class="fragment" data-fragment-index="2" -->
-- easy undo/redo, <!-- .element: class="fragment" data-fragment-index="2" -->
+- undo/redo, <!-- .element: class="fragment" data-fragment-index="3" -->
 - record and replay <!-- .element: class="fragment" data-fragment-index="4" -->
+
+Note:
+By using pure functions, we get these as freebies.
