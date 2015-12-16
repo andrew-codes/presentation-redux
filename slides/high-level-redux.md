@@ -1,4 +1,4 @@
-## The Four Pieces to the Puzzle
+## High-Level Redux
 
 - Actions <!-- .element: class="fragment" data-fragment-index="1" -->
 - Action Creators <!-- .element: class="fragment" data-fragment-index="2" -->
@@ -6,17 +6,16 @@
 - a Redux Store <!-- .element: class="fragment" data-fragment-index="4" -->
 
 
-
-## Actions
+### Actions
 
 - describe something that happened  <!-- .element: class="fragment" data-fragment-index="1" -->
 - used to send data from application to store <!-- .element: class="fragment" data-fragment-index="2" -->
 
 
-### Example Action
+#### Example Action
 
 ```javascript
-const AddAssetToTimesheetAction = {
+export const AddAssetToTimesheetAction = {
 	type: 'AddAssetToTimesheet',
 	payload: {
 		oidToken: 'Story:10001',
@@ -31,22 +30,22 @@ Note:
 - manually creating this object every time we want to add an asset to timesheet would be cumbersome
 
 
-
-## Action Creators
+### Action Creators
 
 - functions that create actions <!-- .element: class="fragment" data-fragment-index="1" -->
-- allow for easier re-use of actions <!-- .element: class="fragment" data-fragment-index="2" -->
-- action creators don't dispatch actions <!-- .element: class="fragment" data-fragment-index="3" -->
+- action creators don't dispatch actions <!-- .element: class="fragment" data-fragment-index="2" -->
 
 Note:
+- dry up using actions by creating a function to stamp them out
+- easier to re-use actions
 - easier to test
 - more portable
 
 
-### Example Action Creator
+#### Example Action Creator
 
 ```javascript
-function AddAssetToTimesheet(asset) {
+export function AddAssetToTimesheet(asset) {
 	return {
 		type: 'AddAssetToTimesheet',
 		payload: asset
@@ -55,21 +54,25 @@ function AddAssetToTimesheet(asset) {
 ```
 
 
-
-## Reducers
+### Reducers
 
 - describe state transitions <!-- .element: class="fragment" data-fragment-index="1" -->
-- must be pure functions <!-- .element: class="fragment" data-fragment-index="2" -->
+- are pure functions <!-- .element: class="fragment" data-fragment-index="2" -->
+- independent sub-set of state <!-- .element: class="fragment" data-fragment-index="3" -->
+
+Note:
+- reducers do not store state
+- instead, they describe how state mutates from State A to State B given some action
+- sub-set of state is usually drawn along domain boundaries
 
 
-### Example Reducer
+#### Example Reducer
 
 ```javascript
-function timesheetReducer(state, action) {
+export function timesheetReducer(state, action) {
 	switch(action.type) {
 		case 'AddAssetToTimesheet':
-			let newState = Object.assign({}, state);
-			newState.items.push(action.payload);
+			// copy state, mutate it, return new state
 			return newState;
 	}
 	default:
@@ -80,11 +83,10 @@ function timesheetReducer(state, action) {
 Note:
 - notice this reducer handles state for Timesheets only
 - a reducer handles a discrete sub-set of application state
-- then uses composition to combine several reducers to create a single store
+- we'll uses composition to combine several reducers to create a single store
 
 
-
-## Redux Store
+### Redux Store
 
 - storage of all application state <!-- .element: class="fragment" data-fragment-index="1" -->
 - gives read-only access to state <!-- .element: class="fragment" data-fragment-index="2" -->
@@ -92,22 +94,10 @@ Note:
 - registers listeners <!-- .element: class="fragment" data-fragment-index="4" -->
 
 
-### Example Redux Store Creation
+#### Example Redux Store Creation
 
 ```javascript
 import { createStore } from 'redux';
 import TimesheetReducer from './modules/Timesheet/Reducer';
 let store = createStore(TimesheetReducer);
-```
-
-
-### Creating Redux Store with Initial State Data
-
-```javascript
-window.initialDataFromServer = {
-	items: []
-}
-import { createStore } from 'redux';
-import TimesheetReducer from './modules/Timesheet/Reducer';
-let store = createStore(TimesheetReducer, window.initialDataFromServer);
 ```
